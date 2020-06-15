@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Akeneo\Platform\CommunicationChannel\Infrastructure\InternalApi\Announcement;
+namespace Akeneo\Platform\CommunicationChannel\Infrastructure\Delivery\InternalApi\Announcement;
 
 use Symfony\Component\HttpFoundation\Response;
 
