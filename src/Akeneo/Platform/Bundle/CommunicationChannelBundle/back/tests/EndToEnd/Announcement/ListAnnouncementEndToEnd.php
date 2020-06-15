@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Akeneo\Platform\CommunicationChannel\Integration\InternalApi\Announcement;
+namespace Akeneo\Platform\CommunicationChannel\EndToEnd\Announcement;
 
 use Akeneo\Platform\CommunicationChannel\Test\EndToEnd\WebTestCase;
 use PHPUnit\Framework\Assert;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Akeneo\Platform\CommunicationChannel\Infrastructure\Symfony\DependencyInjection;
+namespace Akeneo\Platform\CommunicationChannel\Infrastructure\Framework\Symfony\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
