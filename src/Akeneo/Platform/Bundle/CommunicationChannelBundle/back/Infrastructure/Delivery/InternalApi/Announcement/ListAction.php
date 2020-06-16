@@ -26,8 +26,19 @@ class ListAction
 
     public function __invoke()
     {
-        $listAnnouncementResponse = $this->listAnnouncementsHandler->execute();
+        $announcementItems = $this->listAnnouncementsHandler->execute();
 
-        return new JsonResponse($listAnnouncementResponse);
+        $normalizedAnnouncementItems = $this->normalizeAnnouncementItems($announcementItems);
+
+        return new JsonResponse([
+            'items' => $normalizedAnnouncementItems
+        ]);
+    }
+
+    private function normalizeAnnouncementItems(array $announcementItems): array
+    {
+        return array_map(function (AnnouncementItem $item) {
+            return $item->normalize();
+        }, $announcementItems);
     }
 }

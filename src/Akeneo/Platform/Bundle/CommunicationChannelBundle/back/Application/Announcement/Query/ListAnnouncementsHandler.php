@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Akeneo\Platform\CommunicationChannel\Application\Announcement\Query;
 
-use Akeneo\Platform\CommunicationChannel\Domain\Announcement\Model\Read\AnnouncementItem;
 use Akeneo\Platform\CommunicationChannel\Domain\Announcement\Query\FindAnnouncementItemsInterface;
+use Akeneo\Platform\VersionProviderInterface;
 
 /**
  * @author Christophe Chausseray <chaauseray.christophe@gmail.com>
@@ -15,28 +15,23 @@ use Akeneo\Platform\CommunicationChannel\Domain\Announcement\Query\FindAnnouncem
 final class ListAnnouncementsHandler
 {
     /** @var FindAnnouncementItemsInterface */
-    private  $findAnnouncementItemsInterface;
+    private  $findAnnouncementItems;
 
-    public function __construct(FindAnnouncementItemsInterface $findAnnouncementItemsInterface)
-    {
-        $this->findAnnouncementItemsInterface = $findAnnouncementItemsInterface;
+    public function __construct(
+        VersionProviderInterface $versionProvider,
+        FindAnnouncementItemsInterface $findAnnouncementItems
+    ) {
+        $this->versionProvider = $versionProvider;
+        $this->findAnnouncementItems = $findAnnouncementItems;
     }
 
     public function execute(): array
     {
-        $announcementItems = $this->findAnnouncementItemsInterface->byPimVersion('', '');
+        $edition = $this->versionProvider->getEdition();
+        $version = $this->versionProvider->getPatch();
 
-        $normalizedAnnouncementItems = $this->normalizeAnnouncementItems($announcementItems);
+        $announcementItems = $this->findAnnouncementItems->byPimVersion($edition, $version);
 
-        return [
-            'items' => $normalizedAnnouncementItems,
-        ];
-    }
-
-    private function normalizeAnnouncementItems(array $announcementItems): array
-    {
-        return array_map(function (AnnouncementItem $item) {
-            return $item->normalize();
-        }, $announcementItems);
+        return $announcementItems;
     }
 }

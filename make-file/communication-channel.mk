@@ -59,6 +59,9 @@ _COMMUNICATION_CHANNEL_YARN_RUN = $(YARN_RUN) run --cwd=src/Akeneo/Platform/Bund
 communication-channel-coupling-back:
 	$(PHP_RUN) vendor/bin/php-coupling-detector detect --config-file=src/Akeneo/Platform/Bundle/CommunicationChannelBundle/back/tests/.php_cd.php src/Akeneo/Platform/Bundle/CommunicationChannelBundle/back
 
+communication-channel-unit-back:
+	$(PHP_RUN) vendor/bin/phpspec run src/Akeneo/Platform/Bundle/CommunicationChannelBundle/back/tests/Unit/spec/
+
 communication-channel-e2e-back:
 ifeq ($(CI),true)
 	.circleci/run_phpunit.sh . .circleci/find_phpunit.php Akeneo_Communication_Channel_EndToEnd
@@ -70,6 +73,3 @@ endif
 
 communication-channel-generate-models:
 	$(_COMMUNICATION_CHANNEL_YARN_RUN) generate-models
-
-communication-channel-unit-front:
-	$(_COMMUNICATION_CHANNEL_YARN_RUN) jest --ci
