@@ -68,7 +68,7 @@ final class AnnouncementItem
             'img' => $this->img,
             'altImg' => $this->altImg,
             'link' => $this->link,
-            'startDate' => $this->startDate,
+            'startDate' => $this->startDate->format('F\, jS Y'),
             'notificationDuration' => $this->notificationDuration,
             'tags' => $this->tags,
             'editions' => $this->editions,
