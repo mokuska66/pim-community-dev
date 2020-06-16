@@ -3,6 +3,7 @@
 ## Bug fixes
 
 - PIM-9301: Fix extractUpdatedProductsByConnection query group by issue
+- PIM-9279: Fix missing required attributes display in PEF when an attribute option was deleted
 
 # 4.0.33 (2020-06-11)
 
